@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 
 const schema = yup.object({
   name: yup.string().required('Enter name, please.'),
-  number: yup.number().required('Enter number, please.'),
+  number: yup.string().required('Enter number, please.'),
 });
 
 const FormError = ({ name }) => {
@@ -38,7 +38,7 @@ export const PhonebookForm = () => {
   const contacts = useSelector(state => state.contacts.contacts);
 
   const handleSubmit = ({ name, number }, { resetForm }) => {
-    const newContact = { name, number, id: nanoid() };
+    const newContact = { name, number };
     const doubleContact = contacts.items.find(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
@@ -75,7 +75,7 @@ export const PhonebookForm = () => {
         <Input type="text" name="name" id={nameId} />
         <FormError name="name" component="div" />
         <Label htmlFor={numberId}>Number</Label>
-        <Input type="tel" name="number" id={numberId} />
+        <Input type="text" name="number" id={numberId} />
         <FormError name="number" component="div" />
         <ButtonSubmit type="submit">Add contact</ButtonSubmit>
       </FormStyled>

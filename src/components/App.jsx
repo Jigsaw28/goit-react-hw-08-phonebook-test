@@ -1,30 +1,47 @@
-import { Flip, ToastContainer } from 'react-toastify';
-import { Container, Title } from './App.styled';
-import { Contacts } from './Contacts/Contacts';
-import { Filter } from './Filter/Filter';
-import { PhonebookForm } from './PhonebookForm/PhonebookForm';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import RegisterPage from 'pages/RegisterPage';
 import LoginPage from 'pages/LoginPage';
 import HomePage from 'pages/HomePage';
+import ContactsPage from 'pages/ContactsPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshUser } from '../redux/auth/operations';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const App = () => {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(state => state.auth.isRefreshing);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+  return isRefreshing ? (
+    'Refreshing user'
+  ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="login" element={<LoginPage />} />
+        <Route
+          path="register"
+          element={
+            <RestrictedRoute component={RegisterPage} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="login"
+          element={
+            <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="contacts"
+          element={
+            <PrivateRoute component={ContactsPage} redirectTo="/login" />
+          }
+        />
       </Route>
     </Routes>
-    // <Container>
-    //   <Title>Phonebook</Title>
-    //   <PhonebookForm />
-    //   <Title>Contacts</Title>
-    //   <Filter />
-    //   <Contacts />
-    //   <ToastContainer autoClose={2000} transition={Flip} theme="colored" />
-    // </Container>
   );
 };

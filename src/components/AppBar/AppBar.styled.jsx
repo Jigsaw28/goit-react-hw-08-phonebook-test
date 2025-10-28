@@ -13,6 +13,18 @@ export const Nav = styled.nav`
   gap: 12px;
   align-items: center;
 `;
+export const Left = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const Right = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
 
 export const StyledLink = styled(NavLink)`
   color: #3b5560;
@@ -22,11 +34,6 @@ export const StyledLink = styled(NavLink)`
   font-weight: 500;
   transition: background-color 160ms ease, color 160ms ease,
     transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease;
-
-  /* push other links to the right */
-  &:first-child {
-    margin-right: auto;
-  }
 
   &:hover {
     background: rgba(3, 74, 72, 0.08);

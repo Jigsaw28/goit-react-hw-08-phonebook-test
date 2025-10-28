@@ -8,8 +8,8 @@ const RegisterPage = () => {
     const form = e.currentTarget;
     dispatch(
       register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
+        name: form.elements.name.value.trim(),
+        email: form.elements.email.value.trim(),
         password: form.elements.password.value,
       })
     );
@@ -23,7 +23,7 @@ const RegisterPage = () => {
       <label>Email</label>
       <input type="email" name="email" />
       <label>Password</label>
-      <input type="password" name="password" />
+      <input type="password" name="password" min={6}/>
       <button type="submit">Register</button>
     </form>
   );

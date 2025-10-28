@@ -45,7 +45,7 @@ export const Contacts = () => {
           <ListItem key={contact.id} className="item">
             <ContactInfo className="item">
               <ContactName>{contact.name}</ContactName>
-              <ContactNumber>{contact.phone}</ContactNumber>
+              <ContactNumber>{contact.number}</ContactNumber>
             </ContactInfo>
             <DeleteButton
               className="btn-delete"
