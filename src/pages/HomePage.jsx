@@ -1,9 +1,14 @@
+import { Title } from 'components/App.styled';
+import { Card, Lead, Wrapper } from './HomePage.styled';
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main landing page of the application.</p>
-    </div>
+    <Wrapper>
+      <Card>
+        <Title>Welcome to Phonebook</Title>
+        <Lead>Store and manage your contacts quickly and conveniently.</Lead>
+      </Card>
+    </Wrapper>
   );
-}
+};
 export default HomePage;
